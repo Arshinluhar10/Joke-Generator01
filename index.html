@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>joke</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Annapurna+SIL:wght@400;700&family=Bebas+Neue&family=Noto+Sans+Buhid&family=Oswald:wght@200..700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: chocolate;
+        }
+
+        .container {
+            /* border: 2px solid silver; */
+            height: 220px;
+            width: 100%;
+            max-width: 650px;
+            margin-top: 40px;
+            text-align: center;
+            background-color: black;
+            margin: 20px 10px;
+            border-radius: 10px;
+            padding: 20px 30px;
+
+
+        }
+
+        #loader {
+            width: 100px;
+            margin: 0 auto;
+        }
+
+        .container p {
+            margin: 10px;
+            padding: 10px;
+            color: white;
+            font-family: "Bebas Neue", sans-serif;
+            letter-spacing: 2px;
+
+        }
+
+        .container span {
+            font-size: 3rem;
+        }
+
+        .container button {
+            padding: 7px;
+            border: none;
+            border-radius: 5px;
+            background-color: chocolate;
+            color: white;
+            font-family: "Bebas Neue", sans-serif;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <span>&#128514;</span>
+        <img src="images/Ripple-1.2s-231px.gif" id="loader">
+        <p id="joke"></p>
+        <button id="btn" onclick="getJoke()">Get Random Joke</button>
+    </div>
+
+    <script>
+        const jokecontainer = document.getElementById("joke");
+        const button = document.getElementById("btn");
+        const loading = document.getElementById("loader");
+        const url = "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single"
+        let getJoke = () => {
+            loading.style.display = "block";
+            jokecontainer.style.display = "none";
+            fetch(url)
+                .then(data => data.json())
+                .then(item => {
+                    loading.style.display = "none";
+                    randorJoke(item.joke);
+                    jokecontainer.style.display = "block";
+                });
+        }
+        function randorJoke(joke) {
+            jokecontainer.textContent = joke;
+        }
+        getJoke();
+        // console.log(getJoke)
+    </script>
+</body>
+
+</html>
